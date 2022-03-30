@@ -1,0 +1,137 @@
+Errors in the test split of LC-QuAD
+
+1. Completely unrelated answer:
+
+a. What are the airline hubs of Cascade Airways?", 
+SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Union_of_Cambodian_Democrats> <http://dbpedia.org/ontology/ideology> ?uri } ",
+
+b. Which university with athletics department in NCAA Division I Football Bowl Subdivision has nickname Tulane Green Wave ?
+SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/ontology/mouthMountain> <http://dbpedia.org/resource/St._Louis> . ?uri <http://dbpedia.org/ontology/rightTributary> <http://dbpedia.org/resource/Madison_River>  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/University>}
+
+
+2. Incorrect type of answer:
+
+Give me everything owned by networks which is lead by Steve Burke?
+SELECT DISTINCT COUNT(?uri) WHERE { ?x <http://dbpedia.org/ontology/keyPerson> <http://dbpedia.org/resource/Steve_Burke_(businessman)> . ?uri <http://dbpedia.org/ontology/network> ?x  . }"
+
+For "give me everything" a query should start with “SELECT DISTINCT ?uri WHERE…” without "COUNT" (“COUNT” gives the total number of answers, not the answers themselves).
+
+
+3. Confusion of subjects and objects in RDF triples: 
+
+a. What is the successor of PlayStation 4
+SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/property/successor> <http://dbpedia.org/resource/PlayStation_4>  . }
+
+The answer should be:
+SELECT DISTINCT ?uri WHERE {<http://dbpedia.org/resource/PlayStation_4> <http://dbpedia.org/property/successor> ?uri}
+but it is not possible, because the successor of PlayStation 4 does not exist yet.
+So the question should be rather: “Whose successor is PlayStation 4?”
+
+b. For how many PMs did the politician work , whose successor was Kingsley Wood
+SELECT DISTINCT COUNT(?uri) WHERE { <http://dbpedia.org/resource/Kingsley_Wood> <http://dbpedia.org/ontology/successor> ?x . ?x <http://dbpedia.org/property/primeminister> ?uri  . ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/OfficeHolder>}
+
+The question should be “For how many PMs did the politician, who was the successor of Kingsley Wood, work?”
+
+c. In which states does the river flow whose left tributary is Toms Creek?
+SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Toms_Creek_(Monocacy_River)> <http://dbpedia.org/ontology/leftTributary> ?x . ?x <http://dbpedia.org/ontology/state> ?uri  . }
+The question should be “In which states does the river, which is a left tributary of Toms Creek, flow?”
+
+
+4. Logical error:
+What is the total number of participant in conflict of SFOR
+Gold: SELECT DISTINCT COUNT(?uri) WHERE { ?x <http://dbpedia.org/property/battles> <http://dbpedia.org/resource/SFOR> . ?x <http://dbpedia.org/ontology/battle> ?uri  . }
+Our: SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/ontology/battle> <http://dbpedia.org/resource/SFOR>}
+
+The gold query outputs other battles, not participants.
+
+
+5. What are the track and field events of Jamiatu Muslim Mindanao?
+SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Jamiatu_Muslim_Mindanao> <http://dbpedia.org/property/athletics> ?uri }
+
+The answers are: 
+http://dbpedia.org/resource/Association_football
+http://dbpedia.org/resource/Badminton
+http://dbpedia.org/resource/Baseball
+http://dbpedia.org/resource/Basketball
+http://dbpedia.org/resource/Chess
+http://dbpedia.org/resource/Volleyball 
+
+They are not track and field events.
+
+
+6. Name the rivers who originate from Essex?
+Gold answer: SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/ontology/mouthPlace> <http://dbpedia.org/resource/Essex>  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/River>}
+Our answer: SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/property/sourceRegion> <http://dbpedia.org/resource/Essex>. ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/River>}
+
+"Originate" means "source", not "mouth".
+
+
+7. Gold query lacks the class restriction:
+
+a. Count the total number  of hometown of the gymnasts whose one of the hometown in Russia ?
+Gold: SELECT DISTINCT COUNT(?uri) WHERE { ?x <http://dbpedia.org/property/hometown> <http://dbpedia.org/resource/Russia> . ?x <http://dbpedia.org/property/hometown> ?uri }
+Our: SELECT DISTINCT COUNT(?uri) WHERE {?x <http://dbpedia.org/property/hometown> <http://dbpedia.org/resource/Russia>. ?x <http://dbpedia.org/property/hometown> ?uri. ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Gymnast>}
+
+Here the “gold” query doesn’t check for “?x” being of the class “Gymnast”, so the answers include hometowns of other people, not only gymnasts.
+
+b. What are some people born in NY known for?
+Gold: SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/ontology/birthPlace> <http://dbpedia.org/resource/New_York_City> . ?x <http://dbpedia.org/ontology/knownFor> ?uri  . }
+Our: SELECT DISTINCT ?uri WHERE {?x <http://dbpedia.org/ontology/birthPlace> <http://dbpedia.org/resource/New_York>. ?x <http://dbpedia.org/property/knownFor> ?uri. ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Person>}
+
+“?x” includes also companies, etc.
+
+c. Count the total number of cast member of the television shows whose actress is Joey McIntyre?
+Gold: SELECT DISTINCT COUNT(?uri) WHERE { ?x <http://dbpedia.org/property/starring> <http://dbpedia.org/resource/Joey_McIntyre> . ?x <http://dbpedia.org/property/starring> ?uri }
+Our: SELECT DISTINCT COUNT(?uri) WHERE {?x <http://dbpedia.org/property/starring> <http://dbpedia.org/resource/Joey_McIntyre>. ?x <http://dbpedia.org/property/starring> ?uri. ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/TelevisionShow>}
+
+
+d. In which city was the film star of Singhasan Battisi born ?
+Gold: SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Singhasan_Battisi_(TV_series)> <http://dbpedia.org/ontology/starring> ?x . ?x <http://dbpedia.org/property/birthPlace> ?uri  . }
+Our: SELECT DISTINCT ?uri WHERE {<http://dbpedia.org/resource/Singhasan_Battisi_(TV_series)> <http://dbpedia.org/ontology/starring> ?x. ?x <http://dbpedia.org/ontology/birthPlace> ?uri. ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/City>}
+
+e. List all the movies whose directors were born in Kenosha, Wisconsin?
+Gold: SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/ontology/birthPlace> <http://dbpedia.org/resource/Kenosha,_Wisconsin> . ?uri <http://dbpedia.org/property/director> ?x  . }
+Our: SELECT DISTINCT ?uri WHERE {?x <http://dbpedia.org/ontology/birthPlace> <http://dbpedia.org/resource/Kenosha,_Wisconsin>. ?uri <http://dbpedia.org/property/director> ?x. ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Film>}
+
+f. List the companies operating in Australia?
+Gold: SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/ontology/regionServed> <http://dbpedia.org/resource/Australia> }
+Our: SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/ontology/regionServed> <http://dbpedia.org/resource/Australia>. ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Company>}
+
+g. Marika Gombitov makes songs in which languages?
+
+Gold: SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/artist> <http://dbpedia.org/resource/Marika_Gombitová> . ?x <http://dbpedia.org/property/language> ?uri  . }
+Our: SELECT DISTINCT ?uri WHERE {?x <http://dbpedia.org/ontology/artist> <http://dbpedia.org/resource/Marika_Gombitová>. ?x <http://dbpedia.org/ontology/language> ?uri. ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Song>}
+
+h. What city was recorded in Live in detroit which is also the official residence of ken Holland ?
+Gold: SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Live_in_Detroit,_MI> <http://dbpedia.org/ontology/recordedIn> ?uri. <http://dbpedia.org/resource/Ken_Holland> <http://dbpedia.org/ontology/residence> ?uri}
+Our: SELECT DISTINCT ?uri WHERE {<http://dbpedia.org/resource/Live_in_Detroit,_MI> <http://dbpedia.org/ontology/recordedIn> ?uri. <http://dbpedia.org/resource/Ken_Holland> <http://dbpedia.org/ontology/residence> ?uri. ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/City>}
+
+i. What is the total number of writers whose singles are recorded in Miami?
+Gold: SELECT DISTINCT COUNT(?uri) WHERE { ?x <http://dbpedia.org/ontology/recordedIn> <http://dbpedia.org/resource/Miami> . ?x <http://dbpedia.org/property/writer> ?uri  . }
+Our: SELECT DISTINCT COUNT(?uri) WHERE {?x <http://dbpedia.org/ontology/recordedIn> <http://dbpedia.org/resource/Miami>. ?x <http://dbpedia.org/ontology/writer> ?uri. ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Single>}
+
+j. In which city is the sister station of KTXY located ?
+Gold: SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/KTXY> <http://dbpedia.org/ontology/sisterStation> ?x . ?x <http://dbpedia.org/ontology/city> ?uri  . }
+Our: SELECT DISTINCT ?uri WHERE {<http://dbpedia.org/resource/KTXY> <http://dbpedia.org/ontology/sisterStation> ?x. ?x <http://dbpedia.org/ontology/city> ?uri. ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/City>}
+
+k. How many other home stadium are there of the soccer club whose home stadium is Luzhniki Stadium ?
+Gold: SELECT DISTINCT COUNT(?uri) WHERE { ?x <http://dbpedia.org/ontology/homeStadium> <http://dbpedia.org/resource/Luzhniki_Stadium> . ?x <http://dbpedia.org/ontology/homeStadium> ?uri }
+Our: SELECT DISTINCT COUNT(?uri) WHERE {?x <http://dbpedia.org/property/homeStadium> <http://dbpedia.org/resource/Luzhniki_Stadium>. ?x <http://dbpedia.org/property/homeStadium> ?uri. ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/SoccerClub>}
+
+l. In which city did The Ultimate Fighter: Team Rousey vs. Team Tate take place ?
+Gold: SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/The_Ultimate_Fighter:_Team_Rousey_vs._Team_Tate> <http://dbpedia.org/property/city> ?uri }
+Our: SELECT DISTINCT ?uri WHERE {<http://dbpedia.org/resource/The_Ultimate_Fighter:_Team_Rousey_vs._Team_Tate> <http://dbpedia.org/property/city> ?uri. ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/City>}
+
+m. Where do beauty queens with brown hair reside?
+Gold: SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/hairColor> <http://dbpedia.org/resource/Brown_hair> . ?x <http://dbpedia.org/ontology/residence> ?uri  . }
+
+"?x" includes not only beauty queens, but also e.g. male pornographic actor T.T. Boy.
+
+n. who was the president under whom winston bryant served as a lieutenant?
+Gold: SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/ontology/lieutenant> <http://dbpedia.org/resource/Winston_Bryant> }
+This gives answers: 
+http://dbpedia.org/resource/Bill_Clinton
+http://dbpedia.org/resource/Frank_D._White
+http://dbpedia.org/resource/Presidency_of_Bill_Clinton
+
+But only Bill_Clinton is correct.

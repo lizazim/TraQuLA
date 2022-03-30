@@ -1,0 +1,570 @@
+academic conferences
+academic journals
+activities
+actors
+administrative regions
+adult actors
+agents
+aircrafts
+airlines
+airports
+albums
+amateur boxers
+ambassadors
+american football leagues
+american football players
+american football teams
+amphibians
+amusement park attractions
+anatomical structures
+animals
+animanga characters
+animes
+arachnids
+archaeas
+architects
+architectural structures
+arteries
+artificial satellites
+artists
+artist discographies
+artworks
+asteroids
+astronauts
+athletes
+australian football leagues
+australian football teams
+australian rules football players
+auto racing leagues
+automobiles
+automobile engines
+awards
+bacteria
+badminton players
+bands
+banks
+baronets
+baseball leagues
+baseball players
+baseball seasons
+baseball teams
+basketball leagues
+basketball players
+basketball teams
+battles
+bays
+beach volleyball players
+beauty queens
+beverages
+biological databases
+biomolecules
+birds
+bodies of water
+bodybuilders
+bones
+books
+bowling leagues
+boxers
+boxing leagues
+brains
+breweries
+bridges
+british royalties
+broadcast networks
+broadcasters
+buildings
+bus companies
+business persons
+canadian football leagues
+canadian football teams
+canals
+canoeists
+cars
+cardinals
+career stations
+cartoons
+cases
+castles
+caves
+celestial bodies
+chancellors
+cheeses
+chefs
+chemical compounds
+chemical elements
+chemical substances
+chess players
+christian bishops
+cities
+classical music artists
+classical music compositions
+clerics
+clerical administrative regions
+club moss
+coaches
+colleges
+college coaches
+colours
+comedians
+comedy groups
+comics
+comic strips
+comic characters
+comics characters
+comics creators
+companies
+concentration camps
+conflicts
+congressmen
+conifers
+constellations
+continents
+conventions
+countries
+craters
+cricket grounds
+cricket leagues
+cricket teams
+cricketers
+criminals
+crustaceans
+cultivated varieties
+curlers
+curling leagues
+currencies
+cycads
+cycling races
+cycling teams
+cyclists
+dams
+darts players
+databases
+devices
+dioceses
+diseases
+documents
+drugs
+earthquakes
+economists
+educational institutions
+elections
+embryologies
+engines
+engineers
+entomologists
+enzymes
+ethnic groups
+eukaryotes
+eurovision song contest entries
+events
+fashions
+fashion designers
+ferns
+fictional characters
+field hockey leagues
+figure skaters
+films
+film festivals
+fish
+flowering plants
+foods
+football league seasons
+football matches
+formula one racers
+formula one teams
+fungi
+gaelic games players
+galaxies
+games
+gardens
+genes
+gene locations
+genres
+ginkgos
+given names
+glaciers
+gnetophyte
+golf courses
+golf leagues
+golf players
+golf tournaments
+government agencies
+governors
+grand prix
+grapes
+green algae
+gridiron football players
+groups
+guitarists
+gymnasts
+handball leagues
+handball players
+handball teams
+historians
+historic buildings
+historic places
+hockey teams
+holidays
+hollywood cartoons
+horses
+horse races
+horse riders
+horse trainers
+hospitals
+hotels
+human genes
+human gene locations
+ice hockey leagues
+ice hockey players
+information appliances
+infrastructures
+inline hockey leagues
+insects
+instrumentalists
+islands
+jockeys
+journalists
+judges
+lacrosse leagues
+lacrosse players
+lakes
+languages
+launch pads
+law firms
+legal cases
+legislatures
+libraries
+ligaments
+lighthouses
+locations
+locomotives
+lymphs
+magazines
+mammals
+mangas
+martial artists
+mayors
+means of transportation
+medicians
+members of parliament
+military battles
+military conflicts
+military persons
+military structures
+military units
+minerals
+mixed martial arts events
+mixed martial arts leagues
+models
+molluscas
+molluscs
+monarchs
+monuments
+mosses
+motorcycles
+motorcycle racing leagues
+motorcycle riders
+motorsport racers
+motorsport seasons
+mountains
+mountain passes
+mountain ranges
+mouse genes
+mouse gene locations
+murderers
+muscles
+museums
+music festivals
+music genres
+musicals
+musical artists
+musical works
+musicians
+mythological figures
+names
+nascar drivers
+national collegiate athletic association athletes
+national football league events
+national football league seasons
+natural events
+natural places
+NCAA team seasons
+nerves
+netball players
+newspapers
+nobles
+non-profit organisations
+novels
+office holders
+olympic events
+olympic results
+olympics
+organisations
+organisation members
+painters
+parks
+periodical literatures
+persons
+person functions
+philosophers
+photographers
+places
+planets
+plants
+plays
+playboy playmates
+poems
+poets
+poker players
+political parties
+politicians
+polo leagues
+popes
+populated places
+power stations
+presenters
+presidents
+prime ministers
+prisons
+programs
+programming languages
+projects
+protected areas
+proteins
+public transit systems
+publishers
+races
+race horses
+race tracks
+racecourses
+racing drivers
+radio hosts
+radio programs
+radio stations
+railway lines
+railway stations
+railway tunnels
+record labels
+regions
+religious
+religious buildings
+reptiles
+research projects
+restaurants
+rivers
+roads
+road junctions
+road tunnels
+rockets
+roller coasters
+routes of transportation
+rowers
+royalties
+rugby clubs
+rugby leagues
+rugby players
+saints
+sales
+satellites
+schools
+scientists
+screen writers
+seas
+senators
+series
+settlements
+ships
+shopping malls
+shows
+singles
+sitcoms
+sites of special scientific interest
+skaters
+ski areas
+skiers
+skyscrapers
+snooker champs
+snooker players
+snooker world rankings
+soap characters
+soccer clubs
+soccer club seasons
+soccer leagues
+soccer managers
+soccer players
+soccer tournaments
+societal events
+softball leagues
+softwares
+solar eclipses
+songs
+sounds
+space shuttles
+space stations
+spacecrafts
+species
+speedway leagues
+speedway riders
+speedway teams
+sports
+sport competition results
+sport facilities
+sports events
+sports leagues
+sports managers
+sports seasons
+sports teams
+sports team members
+sports team seasons
+squash players
+stadiums
+stars
+stations
+streams
+sumo wrestlers
+supreme courts of the united states case
+surnames
+swimmers
+table tennis players
+televion shows
+television programs
+television series
+television episodes
+television hosts
+television seasons
+television shows
+television stations
+tennis leagues
+tennis players
+tennis tournaments
+theatres
+time periods
+topical concepts
+tournaments
+towers
+towns
+trade unions
+trains
+tunnels
+tv series
+tv shows
+units of work
+universities
+valleys
+vehicles
+veins
+venues
+video games
+videogames leagues
+villages
+voice actors
+volcanos
+volleyball coaches
+volleyball leagues
+volleyball players
+wars
+water rides
+waterway tunnels
+weapons
+websites
+wine regions
+wineries
+winter sport players
+women’s tennis association tournaments
+works
+world heritage sites
+wrestlers
+wrestling events
+writers
+written works
+years
+year in spaceflights
+music artists
+magazine companies
+flight companies
+politicians
+officers
+statesmen
+presidents of united states
+military commanders
+officeholders
+colonels
+corporations
+universits
+unis
+movies
+motion picture stories
+motion pictures
+states
+districts
+admin regions
+party leaders
+senates
+football teams
+players
+sportsmen
+nations
+coutries
+ancient countries
+royal persons
+kingships
+aristocrats
+kings and queens
+kings
+queens
+royalities
+royal peoples
+clubs
+football clubs
+rives
+football players
+footballers
+institues
+institutes
+institutions
+high schools
+educational institutes
+railway tracks
+railroads
+radios
+technological products
+appliances
+computers
+consoles
+info appliances
+peoples
+dudes
+researchers
+physicists
+water bodies
+areas
+settlements areas
+designers
+american militaries
+units
+militaries
+army units
+armymen
+veterans
+military generals
+generals
+military peoples
+authors
+seasons
+soccer seasons
+parties
+members
+managers
+football seasons
+car engines
+networks
+non for profit
+publishing houses
+religious figures
+continents of the world
+creators
+agencies
+characters
+leagues
+teams
+something

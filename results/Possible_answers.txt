@@ -1,0 +1,111 @@
+Questions answered by our system in a different, but semantically valid way (e.g. the answer(s) retrieved by the “gold” and “our” queries are completely or partly different, but the logic of building “our” query is still viable):
+
+1. To which american football teams does the Heinz Field serve as home stadium?
+Gold: SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Heinz_Field> <http://dbpedia.org/property/tenants> ?uri }
+Our: SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/ontology/stadium> <http://dbpedia.org/resource/Heinz_Field>. ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/SportsTeam>}
+
+2. Whose mayors are affiliated with Christen-Democratisch en Vlaams?
+Gold: SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/affiliation> <http://dbpedia.org/resource/Christen-Democratisch_en_Vlaams> . ?uri <http://dbpedia.org/ontology/leaderName> ?x  . }
+Our: SELECT DISTINCT ?uri WHERE {<http://dbpedia.org/resource/Christen-Democratisch_en_Vlaams> <http://dbpedia.org/ontology/affiliation> ?x. ?uri <http://dbpedia.org/ontology/mayor> ?x}
+
+3. How many people have fought wars where Arthur St. Clair was a commander?
+Gold: SELECT DISTINCT COUNT(?uri) WHERE { ?x <http://dbpedia.org/ontology/commander> <http://dbpedia.org/resource/Arthur_St._Clair> . ?x <http://dbpedia.org/property/combatant> ?uri  . }
+Our: SELECT DISTINCT COUNT(?uri) WHERE {?x <http://dbpedia.org/ontology/commander> <http://dbpedia.org/resource/Arthur_St._Clair>. ?uri <http://dbpedia.org/property/battles> ?x. ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/MilitaryConflict>}
+
+4. List the soccer players whose current team has the ground Stoke-on-Trent
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/ground> <http://dbpedia.org/resource/Stoke-on-Trent> . ?uri <http://dbpedia.org/property/currentclub> ?x  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/SoccerPlayer>}
+Our: SELECT DISTINCT ?uri WHERE {?x <http://dbpedia.org/ontology/ground> <http://dbpedia.org/resource/Stoke-on-Trent>. ?uri <http://dbpedia.org/ontology/team> ?x. ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/SoccerPlayer>}
+
+"Team" and "current team" are treated as synonymic in the training data, e.g.:
+
+How many teams have LA kings players in them currently?",
+SELECT DISTINCT COUNT(?uri) WHERE { ?x <http://dbpedia.org/ontology/formerTeam> <http://dbpedia.org/resource/Los_Angeles_Kings> . ?x <http://dbpedia.org/ontology/team> ?uri  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/SportsTeam>}
+
+5. What is the relegious affiliations of Katyayana
+Gold: SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Katyayana_(Buddhist)> <http://dbpedia.org/property/religion> ?uri } 
+Our: SELECT DISTINCT ?uri WHERE {<http://dbpedia.org/resource/Kātyāyana> <http://dbpedia.org/property/religion> ?uri}
+
+6. Which party has come in power in Mumbai North
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/constituency> <http://dbpedia.org/resource/Mumbai_North_(Lok_Sabha_constituency)> . ?x <http://dbpedia.org/ontology/party> ?uri  . }
+Our: SELECT DISTINCT ?uri WHERE {<http://dbpedia.org/resource/Mumbai_North_(Lok_Sabha_constituency)> <http://dbpedia.org/property/party> ?uri}
+
+7. Where can one find some quick bread in the world?
+Gold: SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/type> <http://dbpedia.org/resource/Quick_bread> . ?x <http://dbpedia.org/ontology/region> ?uri  . }
+Our: SELECT DISTINCT ?uri WHERE {<http://dbpedia.org/resource/Quick_bread> <http://dbpedia.org/property/country> ?uri}
+
+8. What is the number of occupation of the people who died in tampa bay, florida
+SELECT DISTINCT COUNT(?uri) WHERE { ?x <http://dbpedia.org/ontology/deathPlace> <http://dbpedia.org/resource/Tampa,_Florida> . ?x <http://dbpedia.org/ontology/occupation> ?uri  . }
+Our: SELECT DISTINCT ?uri WHERE {?x <http://dbpedia.org/ontology/deathPlace> <http://dbpedia.org/resource/Tampa_Bay>. ?x <http://dbpedia.org/ontology/occupation> ?uri. ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Person>}
+
+9. GetTV is owned by which organisation?
+ SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/GetTV> <http://dbpedia.org/ontology/parentOrganisation> ?uri } 
+Our: SELECT DISTINCT ?uri WHERE {<http://dbpedia.org/resource/GetTV> <http://dbpedia.org/ontology/owningCompany> ?uri. ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Organisation>}
+
+10. To which places do the flights go by airlines headquartered in the UK?
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/headquarters> <http://dbpedia.org/resource/United_Kingdom> . ?x <http://dbpedia.org/property/destinations> ?uri  . ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Airline>}
+Our: SELECT DISTINCT ?uri WHERE {?x <http://dbpedia.org/ontology/headquarter> <http://dbpedia.org/resource/United_Kingdom>. ?x <http://dbpedia.org/property/focusCities> ?uri. ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Airline>}
+
+11. Which company has developed games whose music is done by Gerard Marino
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/ontology/composer> <http://dbpedia.org/resource/Gerard_Marino> . ?x <http://dbpedia.org/ontology/developer> ?uri  . ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/VideoGame>}
+Our: SELECT DISTINCT ?uri WHERE {?x <http://dbpedia.org/property/music> <http://dbpedia.org/resource/Gerard_Marino>. ?x <http://dbpedia.org/ontology/developer> ?uri. ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Company>}
+
+12. Who all are known to play the Gibson Guitar Corporation
+SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/property/notableInstruments> <http://dbpedia.org/resource/Gibson_Guitar_Corporation> } 
+Our: SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/ontology/instrument> <http://dbpedia.org/resource/Gibson_Guitar_Corporation>}
+
+13. For which teams did Ryan Powell play for
+SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Ryan_Powell_(lacrosse)> <http://dbpedia.org/ontology/team> ?uri } 
+Our: SELECT DISTINCT ?uri WHERE {<http://dbpedia.org/resource/Ryan_Powell_(rugby_league)> <http://dbpedia.org/ontology/formerTeam> ?uri. ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/HockeyTeam>}
+
+14. Who has fought in wars under commander Arthur St Clair?
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/ontology/commander> <http://dbpedia.org/resource/Arthur_St._Clair> . ?x <http://dbpedia.org/property/combatant> ?uri  . }
+Our: SELECT DISTINCT ?uri WHERE {?x <http://dbpedia.org/ontology/commander> <http://dbpedia.org/resource/Arthur_St._Clair>. ?uri <http://dbpedia.org/property/battles> ?x. ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/MilitaryConflict>}
+
+15. Who is buried at the place governed by National Park Service?
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/governingBody> <http://dbpedia.org/resource/National_Park_Service> . ?uri <http://dbpedia.org/property/restingplace> ?x  . }
+Our: SELECT DISTINCT ?uri WHERE {?x <http://dbpedia.org/ontology/government> <http://dbpedia.org/resource/National_Park_Service>. ?uri <http://dbpedia.org/ontology/restingPlace> ?x. ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Place>}
+
+16. What are the television shows whose company is owned by Viacom?
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/ontology/owningCompany> <http://dbpedia.org/resource/Viacom_(original)> . ?uri <http://dbpedia.org/property/company> ?x  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/TelevisionShow>}
+Our: SELECT DISTINCT ?uri WHERE {?x <http://dbpedia.org/ontology/owner> <http://dbpedia.org/resource/Viacom>. ?uri <http://dbpedia.org/ontology/company> ?x. ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/TelevisionShow>}
+
+17. How many movies have a screenplay located in the States
+SELECT DISTINCT COUNT(?uri) WHERE { ?x <http://dbpedia.org/ontology/birthPlace> <http://dbpedia.org/resource/United_States> . ?uri <http://dbpedia.org/property/screenplay> ?x  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Film>}
+Our: SELECT DISTINCT ?uri WHERE {?x <http://dbpedia.org/ontology/location> <http://dbpedia.org/resource/United_States>. ?uri <http://dbpedia.org/property/screenplay> ?x. ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Film>}
+
+18. What are some people born in NY known for?
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/ontology/birthPlace> <http://dbpedia.org/resource/New_York_City> . ?x <http://dbpedia.org/ontology/knownFor> ?uri  . }
+Our: SELECT DISTINCT ?uri WHERE {?x <http://dbpedia.org/ontology/birthPlace> <http://dbpedia.org/resource/New_York>. ?x <http://dbpedia.org/property/knownFor> ?uri. ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Person>}
+
+19. How many fictional characters were humans?
+SELECT DISTINCT COUNT(?uri) WHERE {?uri <http://dbpedia.org/ontology/species> <http://dbpedia.org/resource/Human>  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/FictionalCharacter>}
+Our: SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/property/role> <http://dbpedia.org/resource/Human>. ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/FictionalCharacter>}
+
+20. Which companies makes cars assembled in Karachi, Pakistan?
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/assembly> <http://dbpedia.org/resource/Karachi> . ?x <http://dbpedia.org/property/parentCompany> ?uri  . ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Automobile>}
+Our: SELECT DISTINCT ?uri WHERE {?x <http://dbpedia.org/property/assembly> <http://dbpedia.org/resource/Karachi>. ?x <http://dbpedia.org/ontology/manufacturer> ?uri. ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Automobile>}
+
+21. Bantam Spectra is the publisher of which series
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/publisher> <http://dbpedia.org/resource/Bantam_Spectra> . ?x <http://dbpedia.org/ontology/series> ?uri  . }
+Our: SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/ontology/publisher> <http://dbpedia.org/resource/Bantam_Spectra>. ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/TelevisionShow>}
+
+"Series" is sometimes regarded as a synonym to class "Television show" in the train set, e.g.:
+
+Give me some series related to the one which had Yasmin Paige in them.
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/starring> <http://dbpedia.org/resource/Yasmin_Paige> . ?uri <http://dbpedia.org/ontology/related> ?x  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/TelevisionShow>}
+
+Give me some series whose network's owning company is Warner Bros. Television?
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/ontology/owningCompany> <http://dbpedia.org/resource/Warner_Bros._Television> . ?uri <http://dbpedia.org/ontology/network> ?x  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/TelevisionShow>}
+        
+22. Which artists trained in San Francisco Art Institute?
+SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/property/training> <http://dbpedia.org/resource/San_Francisco_Art_Institute>  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Artist>}
+Our: SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/ontology/training> <http://dbpedia.org/resource/San_Francisco_Art_Institute>. ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/MusicalArtist>}
+
+"Musical artist" and "artist" are sometimes used interchangeably in the training set, e.g.:
+
+Rickenbacker is a musical instrument played by which artists?
+SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/ontology/instrument> <http://dbpedia.org/resource/Rickenbacker>  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/MusicalArtist>}
+
+23. How many things are written in C++?
+Gold: SELECT DISTINCT COUNT(?uri) WHERE {?uri <http://dbpedia.org/property/programmingLanguage> <http://dbpedia.org/resource/C++>  . }
+Our: SELECT DISTINCT COUNT(?uri) WHERE {?uri <http://dbpedia.org/property/writtenIn> <http://dbpedia.org/resource/C++>}
